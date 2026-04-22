@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class CustomField {
 
-	const FIELDS_TABLE = 'nah_booking_fields';
-	const VALUES_TABLE = 'nah_booking_field_values';
+	const FIELDS_TABLE = 'nivaj_ah_booking_fields';
+	const VALUES_TABLE = 'nivaj_ah_booking_field_values';
 
 	const VALID_TYPES = [ 'text', 'textarea', 'select', 'checkbox', 'phone', 'url', 'number' ];
 

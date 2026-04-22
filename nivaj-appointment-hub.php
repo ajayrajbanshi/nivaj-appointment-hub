@@ -21,13 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'NAH_VERSION', '1.0.0' );
-define( 'NAH_FILE', __FILE__ );
-define( 'NAH_PATH', plugin_dir_path( __FILE__ ) );
-define( 'NAH_URL', plugin_dir_url( __FILE__ ) );
-define( 'NAH_BASENAME', plugin_basename( __FILE__ ) );
+define( 'NIVAJ_AH_VERSION', '1.0.0' );
+define( 'NIVAJ_AH_FILE', __FILE__ );
+define( 'NIVAJ_AH_PATH', plugin_dir_path( __FILE__ ) );
+define( 'NIVAJ_AH_URL', plugin_dir_url( __FILE__ ) );
+define( 'NIVAJ_AH_BASENAME', plugin_basename( __FILE__ ) );
 
-require_once NAH_PATH . 'includes/class-loader.php';
+require_once NIVAJ_AH_PATH . 'includes/class-loader.php';
 Loader::register();
 
 add_action( 'plugins_loaded', function () {

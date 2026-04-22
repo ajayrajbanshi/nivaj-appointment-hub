@@ -36,7 +36,7 @@ class Loader {
 		$filename = strtolower( preg_replace( '/([a-z])([A-Z])/', '$1-$2', $relative_class ) );
 		$filename = 'class-' . str_replace( '_', '-', $filename ) . '.php';
 
-		$file = NAH_PATH . 'includes/' . $filename;
+		$file = NIVAJ_AH_PATH . 'includes/' . $filename;
 
 		if ( file_exists( $file ) ) {
 			require_once $file;

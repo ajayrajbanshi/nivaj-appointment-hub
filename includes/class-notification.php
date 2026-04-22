@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Notification {
 
 	public function __construct() {
-		add_action( 'nah_booking_created', [ $this, 'send_confirmation' ] );
-		add_action( 'nah_booking_created', [ $this, 'send_admin_alert' ] );
-		add_action( 'nah_booking_cancelled', [ $this, 'send_cancellation' ] );
+		add_action( 'nivaj_ah_booking_created', [ $this, 'send_confirmation' ] );
+		add_action( 'nivaj_ah_booking_created', [ $this, 'send_admin_alert' ] );
+		add_action( 'nivaj_ah_booking_cancelled', [ $this, 'send_cancellation' ] );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Notification {
 	 */
 	public static function process_reminders(): void {
 		global $wpdb;
-		$table = $wpdb->prefix . 'nah_bookings';
+		$table = $wpdb->prefix . 'nivaj_ah_bookings';
 
 		$settings       = Settings::get_all();
 		$reminder_hours = (int) $settings['reminder_hours'];
@@ -170,7 +170,7 @@ class Notification {
 
 		// Check for theme override.
 		$theme_path  = get_stylesheet_directory() . '/nivaj-appointment-hub/emails/' . $template . '.php';
-		$plugin_path = NAH_PATH . 'templates/emails/' . $template . '.php';
+		$plugin_path = NIVAJ_AH_PATH . 'templates/emails/' . $template . '.php';
 
 		$path = file_exists( $theme_path ) ? $theme_path : $plugin_path;
 

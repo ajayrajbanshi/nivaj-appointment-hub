@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class RestApi {
 
-	const NAMESPACE = 'nah/v1';
+	const NAMESPACE = 'nivaj-ah/v1';
 
 	public function __construct() {
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );
@@ -200,7 +200,7 @@ class RestApi {
 		$ip  = isset( $_SERVER['REMOTE_ADDR'] )
 			? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) )
 			: '0.0.0.0';
-		$key = 'nah_rate_' . wp_hash( $ip );
+		$key = 'nivaj_ah_rate_' . wp_hash( $ip );
 		$count = (int) get_transient( $key );
 		if ( $count >= 5 ) {
 			return new \WP_REST_Response( [

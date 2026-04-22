@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class BookingType {
 
-	const TABLE           = 'nah_booking_types';
-	const RULES_TABLE     = 'nah_availability_rules';
-	const OVERRIDES_TABLE = 'nah_date_overrides';
+	const TABLE           = 'nivaj_ah_booking_types';
+	const RULES_TABLE     = 'nivaj_ah_availability_rules';
+	const OVERRIDES_TABLE = 'nivaj_ah_date_overrides';
 
 	/**
 	 * Get a single booking type by ID.

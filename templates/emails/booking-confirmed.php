@@ -4,16 +4,16 @@
  *
  * Available variables: $booking, $booking_type, $settings, $site_name, $site_url
  *
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Locals are scoped inside an include() call from Notification::render_email() and are not actually global; they carry the plugin "nah_" prefix.
+ * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Locals are scoped inside an include() call from Notification::render_email() and are not actually global.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$nah_date_formatted = date_i18n( $settings['date_format'], strtotime( $booking['booking_date'] ) );
-$nah_start_time     = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['start_time'] ) );
-$nah_end_time       = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['end_time'] ) );
+$nivaj_ah_date_formatted = date_i18n( $settings['date_format'], strtotime( $booking['booking_date'] ) );
+$nivaj_ah_start_time     = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['start_time'] ) );
+$nivaj_ah_end_time       = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['end_time'] ) );
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,11 +62,11 @@ $nah_end_time       = date_i18n( $settings['time_format'], strtotime( $booking['
 											</tr>
 											<tr>
 												<td style="padding: 8px 0; color: #666; font-size: 14px;"><?php esc_html_e( 'Date', 'nivaj-appointment-hub' ); ?></td>
-												<td style="padding: 8px 0; color: #333; font-size: 14px; font-weight: 600;"><?php echo esc_html( $nah_date_formatted ); ?></td>
+												<td style="padding: 8px 0; color: #333; font-size: 14px; font-weight: 600;"><?php echo esc_html( $nivaj_ah_date_formatted ); ?></td>
 											</tr>
 											<tr>
 												<td style="padding: 8px 0; color: #666; font-size: 14px;"><?php esc_html_e( 'Time', 'nivaj-appointment-hub' ); ?></td>
-												<td style="padding: 8px 0; color: #333; font-size: 14px; font-weight: 600;"><?php echo esc_html( $nah_start_time . ' - ' . $nah_end_time ); ?></td>
+												<td style="padding: 8px 0; color: #333; font-size: 14px; font-weight: 600;"><?php echo esc_html( $nivaj_ah_start_time . ' - ' . $nivaj_ah_end_time ); ?></td>
 											</tr>
 											<tr>
 												<td style="padding: 8px 0; color: #666; font-size: 14px;"><?php esc_html_e( 'Duration', 'nivaj-appointment-hub' ); ?></td>

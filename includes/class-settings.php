@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Settings {
 
-	const OPTION_KEY = 'nah_settings';
+	const OPTION_KEY = 'nivaj_ah_settings';
 
 	/**
 	 * Get all settings merged with defaults.

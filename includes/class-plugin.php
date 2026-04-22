@@ -53,16 +53,16 @@ class Plugin {
 		new Webhook();
 
 		// Cron for reminders.
-		add_action( 'nah_send_reminders', [ Notification::class, 'process_reminders' ] );
+		add_action( 'nivaj_ah_send_reminders', [ Notification::class, 'process_reminders' ] );
 	}
 
 	/**
 	 * Run database upgrade if version has changed.
 	 */
 	private function maybe_upgrade(): void {
-		$installed_version = get_option( 'nah_version', '0' );
+		$installed_version = get_option( 'nivaj_ah_version', '0' );
 
-		if ( version_compare( $installed_version, NAH_VERSION, '<' ) ) {
+		if ( version_compare( $installed_version, NIVAJ_AH_VERSION, '<' ) ) {
 			Activator::activate();
 		}
 	}

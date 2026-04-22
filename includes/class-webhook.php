@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Webhook {
 
 	public function __construct() {
-		add_action( 'nah_booking_created', [ $this, 'on_booking_created' ], 20 );
-		add_action( 'nah_booking_cancelled', [ $this, 'on_booking_cancelled' ], 20 );
-		add_action( 'nah_booking_status_changed', [ $this, 'on_status_changed' ], 20, 2 );
+		add_action( 'nivaj_ah_booking_created', [ $this, 'on_booking_created' ], 20 );
+		add_action( 'nivaj_ah_booking_cancelled', [ $this, 'on_booking_cancelled' ], 20 );
+		add_action( 'nivaj_ah_booking_status_changed', [ $this, 'on_status_changed' ], 20, 2 );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Webhook {
 		$headers = [ 'Content-Type' => 'application/json' ];
 
 		if ( ! empty( $secret ) ) {
-			$headers['X-NAH-Signature'] = hash_hmac( 'sha256', $body, $secret );
+			$headers['X-Nivaj-AH-Signature'] = hash_hmac( 'sha256', $body, $secret );
 		}
 
 		wp_remote_post( $url, [
@@ -141,7 +141,7 @@ class Webhook {
 		$headers = [ 'Content-Type' => 'application/json' ];
 
 		if ( ! empty( $settings['webhook_secret'] ) ) {
-			$headers['X-NAH-Signature'] = hash_hmac( 'sha256', $body, $settings['webhook_secret'] );
+			$headers['X-Nivaj-AH-Signature'] = hash_hmac( 'sha256', $body, $settings['webhook_secret'] );
 		}
 
 		$response = wp_remote_post( $settings['webhook_url'], [

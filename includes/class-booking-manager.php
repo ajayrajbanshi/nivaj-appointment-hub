@@ -7,7 +7,6 @@
  * phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table names come from $wpdb->prefix + static literals; WHERE clauses are built via $wpdb->prepare().
  * phpcs:disable WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- Dynamic IN() placeholders are generated from array_fill() and bound via spread.
  * phpcs:disable PluginCheck.Security.DirectDB.UnescapedDBParameter -- $where is constructed exclusively from $wpdb->prepare() calls; $table is $wpdb->prefix + static literal.
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- All hooks use the plugin "nah_" prefix; the sniff's 4-char minimum doesn't apply since "nah" is the unique plugin prefix.
  */
 
 namespace NivajAppointmentHub;
@@ -18,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class BookingManager {
 
-	const TABLE = 'nah_bookings';
+	const TABLE = 'nivaj_ah_bookings';
 
 	const STATUS_PENDING   = 'pending';
 	const STATUS_CONFIRMED = 'confirmed';
@@ -130,7 +129,7 @@ class BookingManager {
 		$items = $wpdb->get_results(
 			"SELECT b.*, bt.title as booking_type_title, bt.color as booking_type_color
 			FROM {$table} b
-			LEFT JOIN {$wpdb->prefix}nah_booking_types bt ON b.booking_type_id = bt.id
+			LEFT JOIN {$wpdb->prefix}nivaj_ah_booking_types bt ON b.booking_type_id = bt.id
 			{$where}
 			ORDER BY b.booking_date DESC, b.start_time DESC
 			{$limit_clause}",
@@ -185,10 +184,10 @@ class BookingManager {
 			 * @param int    $id         Booking ID.
 			 * @param string $new_status The new status.
 			 */
-			do_action( 'nah_booking_status_changed', $id, $new_status );
+			do_action( 'nivaj_ah_booking_status_changed', $id, $new_status );
 
 			if ( self::STATUS_CANCELLED === $new_status ) {
-				do_action( 'nah_booking_cancelled', $id );
+				do_action( 'nivaj_ah_booking_cancelled', $id );
 			}
 		}
 
@@ -236,7 +235,7 @@ class BookingManager {
 		return $wpdb->get_results(
 			"SELECT b.*, bt.title as booking_type_title
 			FROM {$table} b
-			LEFT JOIN {$wpdb->prefix}nah_booking_types bt ON b.booking_type_id = bt.id
+			LEFT JOIN {$wpdb->prefix}nivaj_ah_booking_types bt ON b.booking_type_id = bt.id
 			{$where}
 			ORDER BY b.booking_date ASC, b.start_time ASC",
 			ARRAY_A
@@ -303,7 +302,7 @@ class BookingManager {
 	public static function get_analytics( int $days = 30 ): array {
 		global $wpdb;
 		$table    = $wpdb->prefix . self::TABLE;
-		$bt_table = $wpdb->prefix . 'nah_booking_types';
+		$bt_table = $wpdb->prefix . 'nivaj_ah_booking_types';
 		$site_tz  = wp_timezone();
 		$now      = new \DateTime( 'now', $site_tz );
 		$from     = ( clone $now )->modify( "-{$days} days" )->format( 'Y-m-d' );
@@ -502,7 +501,7 @@ class BookingManager {
 		 *
 		 * @param int $booking_id The new booking ID.
 		 */
-		do_action( 'nah_booking_created', $booking_id );
+		do_action( 'nivaj_ah_booking_created', $booking_id );
 
 		return [
 			'success'    => true,

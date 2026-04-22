@@ -20,14 +20,14 @@ class Activator {
 		self::schedule_cron();
 
 		// Store version for future migrations.
-		update_option( 'nah_version', NAH_VERSION );
+		update_option( 'nivaj_ah_version', NIVAJ_AH_VERSION );
 	}
 
 	/**
 	 * Run on plugin deactivation.
 	 */
 	public static function deactivate(): void {
-		wp_clear_scheduled_hook( 'nah_send_reminders' );
+		wp_clear_scheduled_hook( 'nivaj_ah_send_reminders' );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Activator {
 		$sql = [];
 
 		// Booking types table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_booking_types (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_booking_types (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			title VARCHAR(200) NOT NULL,
 			slug VARCHAR(200) NOT NULL,
@@ -70,7 +70,7 @@ class Activator {
 		) {$charset_collate};";
 
 		// Availability rules table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_availability_rules (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_availability_rules (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			booking_type_id BIGINT UNSIGNED NOT NULL,
 			day_of_week TINYINT UNSIGNED NOT NULL,
@@ -84,7 +84,7 @@ class Activator {
 		) {$charset_collate};";
 
 		// Date overrides table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_date_overrides (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_date_overrides (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			booking_type_id BIGINT UNSIGNED NOT NULL,
 			override_date DATE NOT NULL,
@@ -99,7 +99,7 @@ class Activator {
 		) {$charset_collate};";
 
 		// Bookings table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_bookings (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_bookings (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			booking_type_id BIGINT UNSIGNED NOT NULL,
 			booking_date DATE NOT NULL,
@@ -124,7 +124,7 @@ class Activator {
 		) {$charset_collate};";
 
 		// Custom booking fields table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_booking_fields (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_booking_fields (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			booking_type_id BIGINT UNSIGNED NOT NULL,
 			field_type VARCHAR(20) NOT NULL DEFAULT 'text',
@@ -140,7 +140,7 @@ class Activator {
 		) {$charset_collate};";
 
 		// Custom field values table.
-		$sql[] = "CREATE TABLE {$wpdb->prefix}nah_booking_field_values (
+		$sql[] = "CREATE TABLE {$wpdb->prefix}nivaj_ah_booking_field_values (
 			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 			booking_id BIGINT UNSIGNED NOT NULL,
 			field_id BIGINT UNSIGNED NOT NULL,
@@ -161,8 +161,8 @@ class Activator {
 	 * Set default plugin options.
 	 */
 	private static function set_default_options(): void {
-		if ( false === get_option( 'nah_settings' ) ) {
-			add_option( 'nah_settings', Settings::defaults() );
+		if ( false === get_option( 'nivaj_ah_settings' ) ) {
+			add_option( 'nivaj_ah_settings', Settings::defaults() );
 		}
 	}
 
@@ -170,8 +170,8 @@ class Activator {
 	 * Schedule cron events.
 	 */
 	private static function schedule_cron(): void {
-		if ( ! wp_next_scheduled( 'nah_send_reminders' ) ) {
-			wp_schedule_event( time(), 'hourly', 'nah_send_reminders' );
+		if ( ! wp_next_scheduled( 'nivaj_ah_send_reminders' ) ) {
+			wp_schedule_event( time(), 'hourly', 'nivaj_ah_send_reminders' );
 		}
 	}
 }

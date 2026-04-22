@@ -24,10 +24,10 @@ Nivaj Appointment Hub is a self-hosted appointment booking plugin for WordPress.
 * Minimum booking notice and maximum advance-booking window
 * Custom fields per service (text, textarea, select, checkbox, number, phone, URL)
 * Email notifications on confirmation, cancellation, and admin alerts, plus reminder emails
-* Shortcode `[nah_booking]` and a Gutenberg block to embed the widget
+* Shortcode `[nivaj_ah_booking]` and a Gutenberg block to embed the widget
 * Optional floating "Book Now" popup button site-wide, with fullscreen mode
 * CSV export of all bookings
-* REST API endpoints under `/wp-json/nah/v1/` for public booking actions
+* REST API endpoints under `/wp-json/nivaj-ah/v1/` for public booking actions
 * Works with guest visitors — no account required to book
 
 = Booking flow =
@@ -45,7 +45,7 @@ Nivaj Appointment Hub is a self-hosted appointment booking plugin for WordPress.
 3. Go to **Appointment Hub → Booking Types** and create your first service.
 4. Set availability under **Availability** for each service.
 5. Configure general options under **Settings**.
-6. Embed the widget on a page using the shortcode `[nah_booking]` or the "Appointment Booking" Gutenberg block. Optionally enable the floating popup button in Settings.
+6. Embed the widget on a page using the shortcode `[nivaj_ah_booking]` or the "Appointment Booking" Gutenberg block. Optionally enable the floating popup button in Settings.
 
 == Frequently Asked Questions ==
 
@@ -61,7 +61,7 @@ If you explicitly enable the **Webhook** integration in Settings and provide you
 
 = Can visitors book without creating an account? =
 
-Yes. The public booking endpoints (`/wp-json/nah/v1/bookings`) accept unauthenticated submissions from guests. Rate limiting (5 attempts per IP per minute) and strict input validation are applied to prevent abuse.
+Yes. The public booking endpoints (`/wp-json/nivaj-ah/v1/bookings`) accept unauthenticated submissions from guests. Rate limiting (5 attempts per IP per minute) and strict input validation are applied to prevent abuse.
 
 = How is spam handled? =
 
@@ -77,7 +77,7 @@ Yes. Availability is interpreted in the site timezone set under Settings. The bo
 
 = Can I pre-select a service or date via URL? =
 
-Yes. Append `?nah_type=<slug>` or `?nah_date=YYYY-MM-DD` (and optionally `nah_name`, `nah_email`, `nah_phone`) to a page containing the widget to pre-fill those values.
+Yes. Append `?nivaj_ah_type=<slug>` or `?nivaj_ah_date=YYYY-MM-DD` (and optionally `nivaj_ah_name`, `nivaj_ah_email`, `nivaj_ah_phone`) to a page containing the widget to pre-fill those values.
 
 = How do I cancel a booking? =
 
@@ -85,7 +85,7 @@ Administrators can cancel or change booking status from the admin Bookings scree
 
 = Where is booking data stored? =
 
-In four custom database tables prefixed with `nah_` (bookings, booking types, availability rules, date overrides). Deleting the plugin via the Plugins screen removes these tables and all plugin options.
+In four custom database tables prefixed with `nivaj_ah_` (bookings, booking types, availability rules, date overrides). Deleting the plugin via the Plugins screen removes these tables and all plugin options.
 
 == Screenshots ==
 
@@ -105,11 +105,11 @@ In four custom database tables prefixed with `nah_` (bookings, booking types, av
 * Custom fields per service (text, textarea, select, checkbox, number, phone, URL).
 * Booking flow with combined date and time step, 7-day horizontal strip, and slots grouped by time of day.
 * Email notifications for confirmation, cancellation, reminders, and admin alerts.
-* Shortcode `[nah_booking]` and a Gutenberg block to embed the widget.
+* Shortcode `[nivaj_ah_booking]` and a Gutenberg block to embed the widget.
 * Optional floating "Book Now" popup button site-wide, with fullscreen mode.
 * CSV export of bookings and dashboard analytics.
 * Optional opt-in webhook integration for booking events.
-* REST API endpoints under `/wp-json/nah/v1/` for public booking actions.
+* REST API endpoints under `/wp-json/nivaj-ah/v1/` for public booking actions.
 
 == Upgrade Notice ==
 

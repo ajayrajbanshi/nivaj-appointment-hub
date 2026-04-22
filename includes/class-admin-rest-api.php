@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class AdminRestApi {
 
-	const NAMESPACE = 'nah/v1/admin';
+	const NAMESPACE = 'nivaj-ah/v1/admin';
 
 	public function __construct() {
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );

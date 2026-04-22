@@ -315,7 +315,7 @@ class AvailabilityEngine {
 		int $buffer_after
 	): array {
 		global $wpdb;
-		$table = $wpdb->prefix . 'nah_bookings';
+		$table = $wpdb->prefix . 'nivaj_ah_bookings';
 
 		$bookings = $wpdb->get_results(
 			$wpdb->prepare(
@@ -485,7 +485,7 @@ class AvailabilityEngine {
 	 */
 	private static function count_bookings_for_date( int $booking_type_id, string $date ): int {
 		global $wpdb;
-		$table = $wpdb->prefix . 'nah_bookings';
+		$table = $wpdb->prefix . 'nivaj_ah_bookings';
 
 		return (int) $wpdb->get_var(
 			$wpdb->prepare(
@@ -502,7 +502,7 @@ class AvailabilityEngine {
 	 */
 	private static function get_bookings_for_range( int $booking_type_id, string $from, string $to ): array {
 		global $wpdb;
-		$table = $wpdb->prefix . 'nah_bookings';
+		$table = $wpdb->prefix . 'nivaj_ah_bookings';
 
 		return $wpdb->get_results(
 			$wpdb->prepare(

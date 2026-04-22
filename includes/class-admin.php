@@ -24,45 +24,45 @@ class Admin {
 			__( 'Nivaj Appointment Hub', 'nivaj-appointment-hub' ),
 			__( 'Appointment Hub', 'nivaj-appointment-hub' ),
 			'manage_options',
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			[ $this, 'render_page' ],
 			'dashicons-calendar-alt',
 			26
 		);
 
 		add_submenu_page(
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			__( 'Dashboard', 'nivaj-appointment-hub' ),
 			__( 'Dashboard', 'nivaj-appointment-hub' ),
 			'manage_options',
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			[ $this, 'render_page' ]
 		);
 
 		add_submenu_page(
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			__( 'Booking Types', 'nivaj-appointment-hub' ),
 			__( 'Booking Types', 'nivaj-appointment-hub' ),
 			'manage_options',
-			'nah-booking-types',
+			'nivaj-ah-booking-types',
 			[ $this, 'render_page' ]
 		);
 
 		add_submenu_page(
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			__( 'Bookings', 'nivaj-appointment-hub' ),
 			__( 'Bookings', 'nivaj-appointment-hub' ),
 			'manage_options',
-			'nah-bookings',
+			'nivaj-ah-bookings',
 			[ $this, 'render_page' ]
 		);
 
 		add_submenu_page(
-			'nah-dashboard',
+			'nivaj-ah-dashboard',
 			__( 'Settings', 'nivaj-appointment-hub' ),
 			__( 'Settings', 'nivaj-appointment-hub' ),
 			'manage_options',
-			'nah-settings',
+			'nivaj-ah-settings',
 			[ $this, 'render_page' ]
 		);
 	}
@@ -72,8 +72,8 @@ class Admin {
 	 */
 	public function render_page(): void {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin page render; $page is sanitized and only used for display.
-		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : 'nah-dashboard';
-		echo '<div id="nah-admin-root" data-page="' . esc_attr( $page ) . '"></div>';
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : 'nivaj-ah-dashboard';
+		echo '<div id="nivaj-ah-admin-root" data-page="' . esc_attr( $page ) . '"></div>';
 	}
 
 	/**
@@ -82,10 +82,10 @@ class Admin {
 	public function enqueue_assets( string $hook ): void {
 		// Only load on our pages.
 		$our_pages = [
-			'toplevel_page_nah-dashboard',
-			'appointment-hub_page_nah-booking-types',
-			'appointment-hub_page_nah-bookings',
-			'appointment-hub_page_nah-settings',
+			'toplevel_page_nivaj-ah-dashboard',
+			'appointment-hub_page_nivaj-ah-booking-types',
+			'appointment-hub_page_nivaj-ah-bookings',
+			'appointment-hub_page_nivaj-ah-settings',
 		];
 
 		if ( ! in_array( $hook, $our_pages, true ) ) {
@@ -95,7 +95,7 @@ class Admin {
 		// Enqueue WordPress Media Library for image uploads.
 		wp_enqueue_media();
 
-		$asset_file = NAH_PATH . 'assets/build/admin-app.asset.php';
+		$asset_file = NIVAJ_AH_PATH . 'assets/build/admin-app.asset.php';
 		if ( ! file_exists( $asset_file ) ) {
 			add_action( 'admin_notices', function () {
 				echo '<div class="notice notice-warning"><p>';
@@ -108,16 +108,16 @@ class Admin {
 		$asset = include $asset_file;
 
 		wp_enqueue_script(
-			'nah-admin-app',
-			NAH_URL . 'assets/build/admin-app.js',
+			'nivaj-ah-admin-app',
+			NIVAJ_AH_URL . 'assets/build/admin-app.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 
 		wp_enqueue_style(
-			'nah-admin-app',
-			NAH_URL . 'assets/build/admin-app.css',
+			'nivaj-ah-admin-app',
+			NIVAJ_AH_URL . 'assets/build/admin-app.css',
 			[ 'wp-components' ],
 			$asset['version']
 		);
@@ -125,9 +125,9 @@ class Admin {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only; sanitized value passed to JS for routing.
 		$current_page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
 
-		wp_localize_script( 'nah-admin-app', 'nahAdmin', [
-			'restUrl'   => esc_url_raw( rest_url( 'nah/v1/admin/' ) ),
-			'publicUrl' => esc_url_raw( rest_url( 'nah/v1/' ) ),
+		wp_localize_script( 'nivaj-ah-admin-app', 'nivajAhAdmin', [
+			'restUrl'   => esc_url_raw( rest_url( 'nivaj-ah/v1/admin/' ) ),
+			'publicUrl' => esc_url_raw( rest_url( 'nivaj-ah/v1/' ) ),
 			'restNonce' => wp_create_nonce( 'wp_rest' ),
 			'page'      => $current_page,
 			'siteUrl'   => esc_url_raw( home_url() ),

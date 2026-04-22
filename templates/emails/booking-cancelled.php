@@ -4,15 +4,15 @@
  *
  * Available variables: $booking, $booking_type, $settings, $site_name, $site_url
  *
- * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Locals are scoped inside an include() call from Notification::render_email() and are not actually global; they carry the plugin "nah_" prefix.
+ * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Locals are scoped inside an include() call from Notification::render_email() and are not actually global.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$nah_date_formatted = date_i18n( $settings['date_format'], strtotime( $booking['booking_date'] ) );
-$nah_start_time     = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['start_time'] ) );
+$nivaj_ah_date_formatted = date_i18n( $settings['date_format'], strtotime( $booking['booking_date'] ) );
+$nivaj_ah_start_time     = date_i18n( $settings['time_format'], strtotime( $booking['booking_date'] . ' ' . $booking['start_time'] ) );
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,8 +48,8 @@ $nah_start_time     = date_i18n( $settings['time_format'], strtotime( $booking['
 								<tr>
 									<td style="padding: 20px;">
 										<p style="margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #333; text-decoration: line-through;"><?php echo esc_html( $booking_type['title'] ?? '' ); ?></p>
-										<p style="margin: 0 0 4px; font-size: 14px; color: #666; text-decoration: line-through;"><?php echo esc_html( $nah_date_formatted ); ?></p>
-										<p style="margin: 0; font-size: 14px; color: #666; text-decoration: line-through;"><?php echo esc_html( $nah_start_time ); ?></p>
+										<p style="margin: 0 0 4px; font-size: 14px; color: #666; text-decoration: line-through;"><?php echo esc_html( $nivaj_ah_date_formatted ); ?></p>
+										<p style="margin: 0; font-size: 14px; color: #666; text-decoration: line-through;"><?php echo esc_html( $nivaj_ah_start_time ); ?></p>
 									</td>
 								</tr>
 							</table>

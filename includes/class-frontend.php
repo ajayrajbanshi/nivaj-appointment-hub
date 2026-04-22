@@ -14,13 +14,13 @@ class Frontend {
 	private bool $assets_enqueued = false;
 
 	public function __construct() {
-		add_shortcode( 'nah_booking', [ $this, 'render_shortcode' ] );
+		add_shortcode( 'nivaj_ah_booking', [ $this, 'render_shortcode' ] );
 		add_action( 'init', [ $this, 'register_block' ] );
 		add_action( 'wp', [ $this, 'maybe_setup_popup' ] );
 	}
 
 	/**
-	 * Render the [nah_booking] shortcode.
+	 * Render the [nivaj_ah_booking] shortcode.
 	 *
 	 * @param array|string $atts Shortcode attributes.
 	 */
@@ -31,7 +31,7 @@ class Frontend {
 				'theme' => 'light', // light|dark.
 			],
 			$atts,
-			'nah_booking'
+			'nivaj_ah_booking'
 		);
 
 		$this->enqueue_frontend_assets();
@@ -42,7 +42,7 @@ class Frontend {
 		}
 		$data_attrs .= ' data-theme="' . esc_attr( $atts['theme'] ) . '"';
 
-		return '<div class="nah-booking-widget"' . $data_attrs . '></div>';
+		return '<div class="nivaj-ah-booking-widget"' . $data_attrs . '></div>';
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Frontend {
 			return;
 		}
 
-		$asset_file = NAH_PATH . 'assets/build/block-editor.asset.php';
+		$asset_file = NIVAJ_AH_PATH . 'assets/build/block-editor.asset.php';
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
@@ -61,15 +61,15 @@ class Frontend {
 		$asset = include $asset_file;
 
 		wp_register_script(
-			'nah-block-editor',
-			NAH_URL . 'assets/build/block-editor.js',
+			'nivaj-ah-block-editor',
+			NIVAJ_AH_URL . 'assets/build/block-editor.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 
-		register_block_type( 'nah/appointment-booking', [
-			'editor_script'   => 'nah-block-editor',
+		register_block_type( 'nivaj-ah/appointment-booking', [
+			'editor_script'   => 'nivaj-ah-block-editor',
 			'render_callback' => [ $this, 'render_block' ],
 			'attributes'      => [
 				'bookingType' => [
@@ -123,7 +123,7 @@ class Frontend {
 			'fullscreen'     => (bool) Settings::get( 'popup_fullscreen' ),
 		];
 
-		echo '<div class="nah-popup-widget" data-config="' . esc_attr( wp_json_encode( $config ) ) . '"></div>';
+		echo '<div class="nivaj-ah-popup-widget" data-config="' . esc_attr( wp_json_encode( $config ) ) . '"></div>';
 	}
 
 	/**
@@ -134,7 +134,7 @@ class Frontend {
 			return;
 		}
 
-		$asset_file = NAH_PATH . 'assets/build/booking-widget.asset.php';
+		$asset_file = NIVAJ_AH_PATH . 'assets/build/booking-widget.asset.php';
 		if ( ! file_exists( $asset_file ) ) {
 			return;
 		}
@@ -142,16 +142,16 @@ class Frontend {
 		$asset = include $asset_file;
 
 		wp_enqueue_script(
-			'nah-booking-widget',
-			NAH_URL . 'assets/build/booking-widget.js',
+			'nivaj-ah-booking-widget',
+			NIVAJ_AH_URL . 'assets/build/booking-widget.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 
 		wp_enqueue_style(
-			'nah-booking-widget',
-			NAH_URL . 'assets/build/booking-widget.css',
+			'nivaj-ah-booking-widget',
+			NIVAJ_AH_URL . 'assets/build/booking-widget.css',
 			[],
 			$asset['version']
 		);
@@ -159,11 +159,11 @@ class Frontend {
 		// Build prefill data from URL parameters.
 		$prefill = [];
 		$prefill_keys = [
-			'nah_type'  => 'type',
-			'nah_date'  => 'date',
-			'nah_name'  => 'name',
-			'nah_email' => 'email',
-			'nah_phone' => 'phone',
+			'nivaj_ah_type'  => 'type',
+			'nivaj_ah_date'  => 'date',
+			'nivaj_ah_name'  => 'name',
+			'nivaj_ah_email' => 'email',
+			'nivaj_ah_phone' => 'phone',
 		];
 		foreach ( $prefill_keys as $param => $key ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -173,8 +173,8 @@ class Frontend {
 			}
 		}
 
-		wp_localize_script( 'nah-booking-widget', 'nahBooking', [
-			'restUrl'      => esc_url_raw( rest_url( 'nah/v1/' ) ),
+		wp_localize_script( 'nivaj-ah-booking-widget', 'nivajAhBooking', [
+			'restUrl'      => esc_url_raw( rest_url( 'nivaj-ah/v1/' ) ),
 			'restNonce'    => wp_create_nonce( 'wp_rest' ),
 			'siteTimezone' => wp_timezone_string(),
 			'dateFormat'   => get_option( 'date_format' ),
