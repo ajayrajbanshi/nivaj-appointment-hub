@@ -25,38 +25,36 @@ class AdminRestApi {
 	}
 
 	public function register_routes(): void {
-		$admin_args = [ 'permission_callback' => [ $this, 'check_permission' ] ];
-
 		// ---- Booking Types ----
 
 		register_rest_route( self::NAMESPACE, '/booking-types', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_booking_types' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_booking_types' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'POST',
-				'callback' => [ $this, 'create_booking_type' ],
-				...$admin_args,
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'create_booking_type' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/booking-types/(?P<id>\d+)', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_booking_type' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_booking_type' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'PUT',
-				'callback' => [ $this, 'update_booking_type' ],
-				...$admin_args,
+				'methods'             => 'PUT',
+				'callback'            => [ $this, 'update_booking_type' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'DELETE',
-				'callback' => [ $this, 'delete_booking_type' ],
-				...$admin_args,
+				'methods'             => 'DELETE',
+				'callback'            => [ $this, 'delete_booking_type' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -64,14 +62,14 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/booking-types/(?P<id>\d+)/availability', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_availability' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_availability' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'PUT',
-				'callback' => [ $this, 'update_availability' ],
-				...$admin_args,
+				'methods'             => 'PUT',
+				'callback'            => [ $this, 'update_availability' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -79,22 +77,22 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/booking-types/(?P<id>\d+)/overrides', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_overrides' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_overrides' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'POST',
-				'callback' => [ $this, 'create_override' ],
-				...$admin_args,
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'create_override' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/overrides/(?P<id>\d+)', [
 			[
-				'methods'  => 'DELETE',
-				'callback' => [ $this, 'delete_override' ],
-				...$admin_args,
+				'methods'             => 'DELETE',
+				'callback'            => [ $this, 'delete_override' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -102,33 +100,33 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/bookings', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_bookings' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_bookings' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/bookings/(?P<id>\d+)', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_booking' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_booking' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/bookings/(?P<id>\d+)/status', [
 			[
-				'methods'  => 'PATCH',
-				'callback' => [ $this, 'update_booking_status' ],
-				...$admin_args,
+				'methods'             => 'PATCH',
+				'callback'            => [ $this, 'update_booking_status' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/bookings/export', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'export_bookings' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'export_bookings' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -136,9 +134,9 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/stats', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_stats' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_stats' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -146,9 +144,9 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/analytics', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_analytics' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_analytics' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -156,27 +154,27 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/booking-types/(?P<id>\d+)/fields', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_custom_fields' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_custom_fields' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'POST',
-				'callback' => [ $this, 'create_custom_field' ],
-				...$admin_args,
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'create_custom_field' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
 		register_rest_route( self::NAMESPACE, '/fields/(?P<id>\d+)', [
 			[
-				'methods'  => 'PUT',
-				'callback' => [ $this, 'update_custom_field' ],
-				...$admin_args,
+				'methods'             => 'PUT',
+				'callback'            => [ $this, 'update_custom_field' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'DELETE',
-				'callback' => [ $this, 'delete_custom_field' ],
-				...$admin_args,
+				'methods'             => 'DELETE',
+				'callback'            => [ $this, 'delete_custom_field' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -184,9 +182,9 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/webhook-test', [
 			[
-				'methods'  => 'POST',
-				'callback' => [ $this, 'test_webhook' ],
-				...$admin_args,
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'test_webhook' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 
@@ -194,14 +192,14 @@ class AdminRestApi {
 
 		register_rest_route( self::NAMESPACE, '/settings', [
 			[
-				'methods'  => 'GET',
-				'callback' => [ $this, 'get_settings' ],
-				...$admin_args,
+				'methods'             => 'GET',
+				'callback'            => [ $this, 'get_settings' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 			[
-				'methods'  => 'PUT',
-				'callback' => [ $this, 'update_settings' ],
-				...$admin_args,
+				'methods'             => 'PUT',
+				'callback'            => [ $this, 'update_settings' ],
+				'permission_callback' => [ $this, 'check_permission' ],
 			],
 		] );
 	}

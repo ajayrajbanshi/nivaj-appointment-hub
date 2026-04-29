@@ -125,3 +125,20 @@ Emails are sent through your site's mailer (`wp_mail()`) to the visitor's email 
 If the **Webhook** integration is enabled in Settings, booking events are POSTed to the URL you configure. Site administrators are responsible for ensuring that the destination complies with their privacy policy and applicable data protection law.
 
 Booking records are retained until manually deleted or until the plugin is uninstalled via the Plugins screen, which drops all plugin tables and options.
+
+== Development ==
+
+Source code: https://github.com/ajayrajbanshi/nivaj-appointment-hub
+
+The compiled JavaScript and CSS files in `assets/build/` are generated from the human-readable source under `src/` (React/JSX components and SCSS) using `@wordpress/scripts` (webpack).
+
+To build from source:
+
+`
+npm install
+npm run build
+`
+
+This produces `assets/build/admin-app.{js,css}`, `assets/build/booking-widget.{js,css}`, and `assets/build/block-editor.js` from `src/admin-app/`, `src/booking-widget/`, and `src/block-editor/` respectively. To produce the wordpress.org distribution zip, run `npm run package`.
+
+No third-party libraries are bundled outside of `@wordpress/*` packages provided by WordPress core (`wp-element`, `wp-components`, `wp-i18n`, `wp-api-fetch`, `wp-blocks`, `wp-block-editor`).
